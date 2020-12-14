@@ -4,12 +4,18 @@ public class Banco {
 	static ArrayList<Conta> contas = new ArrayList<Conta>();
 	
 	public static void abrirConta(Conta c) {
+		int numero = contas.size()+1;
+		c.setNúmeroConta(numero);
 		contas.add(c);
 	}
 	
 	public static void realizarSaque(Conta c, float valor){
-		float v = c.getSaldo() - valor;
-		c.setSaldo(v);
+		if(valor > c.getLimite()) {
+			System.out.println("Valor maior que o limite");
+		}else {
+			float v = c.getSaldo() - valor;
+			c.setSaldo(v);
+		}
 	}
 	
 	public static void realizarDeposito(Conta c, float valor) {
@@ -18,16 +24,14 @@ public class Banco {
 	}
 	
 	public static void realizarTrasnferencia(Conta c1, Conta c2, float valor) {
-		if(c1.getTipoConta() == c2.getTipoConta()) {
-		
-			float v = c1.getSaldo() - valor;
-			c1.setSaldo(v);
+		//if(c1.getTipoConta() == c2.getTipoConta()) {
+			realizarSaque(c1, valor);		
 			
-			float v2 = c2.getSaldo() + valor;
-			c2.setSaldo(v2);
-		}else {
-			System.out.println("Não é possivel realizar transferencia entre contas de tipos diferentes");
-		}
+			realizarDeposito(c2, valor);
+
+//		}else {
+//			System.out.println("Não é possivel realizar transferencia entre contas de tipos diferentes");
+//		}
 	}
 	
 	public static Conta buscarConta(String cpf) {
@@ -40,5 +44,17 @@ public class Banco {
 		}
 		return busca;
 		
+	}
+	
+	public void atualizarLimite(Conta c) {
+		if(c.getSaldo()>500) {
+			c.setLimite(300);
+		}else if(c.getSaldo()<=300) {
+			c.setLimite(100);
+		}
+	}
+	
+	public static void imprimir(Conta c) {
+		c.toString();
 	}
 }

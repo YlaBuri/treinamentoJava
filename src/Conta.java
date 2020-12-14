@@ -1,20 +1,21 @@
 
-public class Conta {
+public abstract class Conta {
 	private String nomeCliente;
 	private String cpf; 
 	private int númeroConta;
 	private float saldo;
 	private float limite;
-	private TipoContaEnum tipoConta;
+	private float rendimento;
+	//private TipoContaEnum tipoConta;
 	
-	public Conta(String nomeCliente, String cpf, int númeroConta, float saldo, float limite, TipoContaEnum tipoConta) {
+	public Conta(String nomeCliente, String cpf, int númeroConta, float saldo, float limite) {
 		super();
 		this.nomeCliente = nomeCliente;
 		this.cpf = cpf;
 		this.númeroConta = númeroConta;
 		this.saldo = saldo;
 		this.limite = limite;
-		this.tipoConta = tipoConta;
+		
 	}
 
 	public String getNomeCliente() {
@@ -57,18 +58,20 @@ public class Conta {
 		this.limite = limite;
 	}
 
-	public TipoContaEnum getTipoConta() {
-		return tipoConta;
+	public float getRendimento() {
+		return rendimento;
 	}
 
-	public void setTipoConta(TipoContaEnum tipoConta) {
-		this.tipoConta = tipoConta;
+	public void setRendimento(float rendimento) {
+		this.rendimento = rendimento;
 	}
+	
+	public abstract float calcularRendimento(float saldo);
 
 	@Override
 	public String toString() {
 		return "Conta [nomeCliente=" + nomeCliente + ", cpf=" + cpf + ", númeroConta=" + númeroConta + ", saldo="
-				+ saldo + ", limite=" + limite + ", tipoConta=" + tipoConta + "]";
+				+ saldo + ", limite=" + limite + "]";
 	}
 	
 	

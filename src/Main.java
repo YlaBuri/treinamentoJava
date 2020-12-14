@@ -4,11 +4,14 @@ public class Main {
 	static Scanner sc = new Scanner(System.in);
 	public static void main(String[] args) {
 		int op = 0;
+		
 		do {
 			System.out.println("1-abrir conta");
 			System.out.println("2-saque");
 			System.out.println("3-deposito");
 			System.out.println("4-transferencia");
+			System.out.println("5-exibir dados");
+			System.out.println("6-verificar rendimento");
 			System.out.println("0-sair");
 			op = sc.nextInt();
 
@@ -25,6 +28,8 @@ public class Main {
 			case 4:
 				realizarTransferencia();
 				break;
+			case 5:
+				break;
 			default:
 				break;
 			}
@@ -39,12 +44,8 @@ public class Main {
 		String cpf = sc.nextLine();
 		System.out.println("Tipo de conta:\n1-conta poupança\n2-conta corrente");
 		int conta= sc.nextInt();
-		TipoContaEnum c = null;
-		if(conta==1) {
-			c = TipoContaEnum.POUPANCA;
-		}else if(conta==2) {
-			c = TipoContaEnum.CORRENTE;
-		}
+
+		
 
 		System.out.println("Deseja fazer um deposito inicial?\n1-sim\n2-não");
 		int resp = sc.nextInt();
@@ -52,7 +53,12 @@ public class Main {
 		if(resp==1) {
 			despositoInicial = sc.nextFloat();
 		}
-		Conta novaConta = new Conta(nome, cpf, 1, despositoInicial, 0, c);
+		Conta novaConta = null;
+		if(conta==1) {
+			novaConta = new ContaPoupanca(nome, cpf, 1, despositoInicial, 0);
+		}else{
+			novaConta = new ContaCorrente(nome, cpf, 1, despositoInicial, 0);
+		}
 		Banco.abrirConta(novaConta);
 	}
 
@@ -87,5 +93,12 @@ public class Main {
 
 		Banco.realizarTrasnferencia(c1, c2, valor);
 
+	}
+	
+	public void imprimir() {
+		System.out.println("cpf:");
+		String cpf = sc.nextLine();
+		Conta conta = Banco.buscarConta(cpf);
+		Banco.imprimir(conta);
 	}
 }
