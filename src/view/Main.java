@@ -1,10 +1,18 @@
+package view;
+import java.sql.Connection;
 import java.util.Scanner;
+
+import controller.Banco;
+import model.Conta;
+import model.ContaCorrente;
+import model.ContaPoupanca;
+import util.ConnectionFactory;
 
 public class Main {
 	static Scanner sc = new Scanner(System.in);
 	public static void main(String[] args) {
 		int op = 0;
-		
+		Connection con = new ConnectionFactory().getConnection();
 		do {
 			System.out.println("1-abrir conta");
 			System.out.println("2-saque");
@@ -39,9 +47,9 @@ public class Main {
 
 	public static void novaConta(){
 		System.out.println("Nome:");
-		String nome = sc.nextLine();
+		String nome = sc.next();
 		System.out.println("CPF:");
-		String cpf = sc.nextLine();
+		String cpf = sc.next();
 		System.out.println("Tipo de conta:\n1-conta poupança\n2-conta corrente");
 		int conta= sc.nextInt();
 

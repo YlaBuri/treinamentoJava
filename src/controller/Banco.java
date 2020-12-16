@@ -1,12 +1,21 @@
+package controller;
 import java.util.ArrayList;
+
+import DAO.ContaDAO;
+import model.Conta;
 
 public class Banco {
 	static ArrayList<Conta> contas = new ArrayList<Conta>();
 	
+	
+	
 	public static void abrirConta(Conta c) {
-		int numero = contas.size()+1;
-		c.setNúmeroConta(numero);
-		contas.add(c);
+		ContaDAO contaDAO = new ContaDAO();
+		contaDAO.inserir(c);
+//		int numero = contas.size()+1;
+//		c.setNúmeroConta(numero);
+//		contas.add(c);
+
 	}
 	
 	public static void realizarSaque(Conta c, float valor){

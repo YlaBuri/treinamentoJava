@@ -1,8 +1,9 @@
+package model;
 
 public abstract class Conta {
+	private int númeroConta;
 	private String nomeCliente;
 	private String cpf; 
-	private int númeroConta;
 	private float saldo;
 	private float limite;
 	private float rendimento;
